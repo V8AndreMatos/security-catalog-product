@@ -1,5 +1,6 @@
 package com.security.catalog.product.dto;
 
+import com.security.catalog.product.entities.Category;
 import com.security.catalog.product.entities.Product;
 import java.time.Instant;
 import java.util.ArrayList;
