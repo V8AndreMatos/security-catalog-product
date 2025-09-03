@@ -1,4 +1,4 @@
-package com.security.catalog.product.resource;
+package com.security.catalog.product.controller;
 
 import com.security.catalog.product.dto.CategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
+
 @RestController
 @RequestMapping(value = "/categories")
-public class CategoryResource {
+public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;

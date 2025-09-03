@@ -1,4 +1,4 @@
-package com.security.catalog.product.resource;
+package com.security.catalog.product.controller;
 
 import com.security.catalog.product.dto.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/products")
-public class ProductResource {
+public class ProductController {
 
     @Autowired
     private ProductService productService;
