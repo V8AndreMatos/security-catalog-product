@@ -1,9 +1,9 @@
 package com.security.catalog.product.services;
 
-import com.security.catalog.product.dto.CategoryDTO;
-import com.security.catalog.product.dto.ProductDTO;
-import com.security.catalog.product.dto.RoleDTO;
+//import com.security.catalog.product.dto.*;
 import com.security.catalog.product.dto.UserDTO;
+import com.security.catalog.product.dto.RoleDTO;
+import com.security.catalog.product.dto.UserInsertDTO;
 import com.security.catalog.product.entities.Category;
 import com.security.catalog.product.entities.Product;
 import com.security.catalog.product.entities.Role;
@@ -18,6 +18,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,9 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private UserRepository userRepository ;
@@ -47,16 +51,17 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO insernewUser(ProductDTO dto) {
+    public UserDTO insernewUser(UserInsertDTO dto) {
 
         User entity = new User(); // Instancia um usuário vazio
         copyDTOToEntity(dto , entity); // Copia os dados do DTO para a entidade
+        entity.setPassword(bCryptPasswordEncoder.encode (dto.getPassword()));
         entity = userRepository.save(entity); // SALVA
-        return new ProductDTO(entity);// Retorna o DTO SALVO
+        return new UserDTO(entity);// Retorna o DTO SALVO
     }
 
     @Transactional
-    public ProductDTO updateUser(Long id , UserDTO dto){
+    public UserDTO updateUser(Long id , UserDTO dto){
         try {
             User entity = userRepository.getReferenceById(id);
             copyDTOToEntity(dto , entity);
@@ -89,7 +94,7 @@ public class UserService {
 
         // Limpa as categorias
         entity.getRoles().clear();
-        for (RoleDTO roleDTO : dto.getRoles()){
+        for (RoleDTO roleDTO : dto.getRolesDTO()){
             Role role = roleRepository.getOne(roleDTO.getId());
             entity.getRoles().add(role);
         }
