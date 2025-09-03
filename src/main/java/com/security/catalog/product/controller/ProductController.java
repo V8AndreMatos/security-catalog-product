@@ -1,6 +1,7 @@
 package com.security.catalog.product.controller;
 
 import com.security.catalog.product.dto.ProductDTO;
+import com.security.catalog.product.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
