@@ -2,6 +2,7 @@ package com.security.catalog.product.services;
 
 import com.security.catalog.product.dto.CategoryDTO;
 import com.security.catalog.product.entities.Category;
+import com.security.catalog.product.exceptions.DataBaseException;
 import com.security.catalog.product.repositories.CategoryRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
