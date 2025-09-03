@@ -1,5 +1,7 @@
 package com.security.catalog.product.dto;
 
+import com.security.catalog.product.entities.Role;
+
 public class RoleDTO {
 
     private Long id;
@@ -11,6 +13,12 @@ public class RoleDTO {
     public RoleDTO(Long id, String authority) {
         this.id = id;
         this.authority = authority;
+    }
+
+    public RoleDTO(Role role) {
+
+        id = role.getId();
+        authority = role.getAuthority();
     }
 
     public Long getId() {
