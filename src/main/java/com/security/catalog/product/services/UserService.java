@@ -1,6 +1,5 @@
 package com.security.catalog.product.services;
 
-//import com.security.catalog.product.dto.*;
 import com.security.catalog.product.dto.UserDTO;
 import com.security.catalog.product.dto.RoleDTO;
 import com.security.catalog.product.dto.UserInsertDTO;
@@ -18,6 +17,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,8 +38,8 @@ public class UserService {
 
 
     @Transactional(readOnly = true)
-    public Page<UserDTO> findAllPaged(PageRequest pageRequest){
-        Page<User> list = userRepository.findAll(pageRequest);
+    public Page<UserDTO> findAllPaged(Pageable pageable){
+        Page<User> list = userRepository.findAll(pageable);
         return list.map(x -> new UserDTO(x));
     }
 
@@ -51,7 +51,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO insernewUser(UserInsertDTO dto) {
+    public UserDTO insertnewUser(UserInsertDTO dto) {
 
         User entity = new User(); // Instancia um usuário vazio
         copyDTOToEntity(dto , entity); // Copia os dados do DTO para a entidade
