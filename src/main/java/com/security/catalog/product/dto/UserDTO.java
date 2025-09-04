@@ -1,15 +1,18 @@
 package com.security.catalog.product.dto;
 
 import com.security.catalog.product.entities.User;
-
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
 public class UserDTO {
 
     private Long id;
+    @NotBlank(message = "required field")
     private String firstName;
     private String lastName;
+    @Email(message = "Please type a valid email")
     private String email;
 
     Set<RoleDTO> rolesDTO = new HashSet<>();

@@ -2,6 +2,10 @@ package com.security.catalog.product.dto;
 
 import com.security.catalog.product.entities.Category;
 import com.security.catalog.product.entities.Product;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +14,11 @@ import java.util.Set;
 public class ProductDTO {
 
     private Long id;
+    @Size(min = 5 , max = 50 , message = "The name must be between 5 and 60 characters long")
+    @NotBlank(message = "required field")
     private String name;
     private String description;
+    @Positive(message = "The price must be positive")
     private Double price;
 
     private List<CategoryDTO> categories =  new ArrayList<>();

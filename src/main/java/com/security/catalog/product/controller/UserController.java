@@ -6,6 +6,7 @@ import com.security.catalog.product.dto.UserInsertDTO;
 import com.security.catalog.product.entities.User;
 import com.security.catalog.product.services.ProductService;
 import com.security.catalog.product.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.data.domain.Page;
@@ -46,7 +47,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> insertProduct(@RequestBody UserInsertDTO dto){
+    public ResponseEntity<UserDTO> insertProduct(@Valid @RequestBody UserInsertDTO dto){
        UserDTO  newUser = userService.insertnewUser(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(newUser.getId()).toUri();
@@ -54,7 +55,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> updateCategory(@PathVariable Long id , @RequestBody UserDTO dto){
+    public ResponseEntity<UserDTO> updateCategory(@PathVariable Long id , @Valid @RequestBody UserDTO dto){
         dto = userService.updateUser(id , dto);
         return ResponseEntity.ok().body(dto);
     }
