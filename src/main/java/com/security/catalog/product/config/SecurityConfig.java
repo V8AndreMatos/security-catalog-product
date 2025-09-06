@@ -17,7 +17,8 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // desabilita CSRF se necessário
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/public/**").permitAll() // libera endpoints públicos
+                        // .requestMatchers("/public/**").permitAll() // libera endpoints públicos
+                        .requestMatchers("/h2-console/**").permitAll() // libera o endpoint do h2-console
                         .anyRequest().authenticated() // exige login pros demais
                 )
                 .formLogin(); // login padrão do Spring Security
