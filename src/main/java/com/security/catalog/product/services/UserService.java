@@ -3,6 +3,7 @@ package com.security.catalog.product.services;
 import com.security.catalog.product.dto.UserDTO;
 import com.security.catalog.product.dto.RoleDTO;
 import com.security.catalog.product.dto.UserInsertDTO;
+import com.security.catalog.product.dto.UserUpdateDTO;
 import com.security.catalog.product.entities.Category;
 import com.security.catalog.product.entities.Product;
 import com.security.catalog.product.entities.Role;
@@ -61,7 +62,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO updateUser(Long id , UserDTO dto){
+    public UserDTO updateUser(Long id , UserUpdateDTO dto){
         try {
             User entity = userRepository.getReferenceById(id);
             copyDTOToEntity(dto , entity);

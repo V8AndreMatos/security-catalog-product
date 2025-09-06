@@ -3,6 +3,7 @@ package com.security.catalog.product.controller;
 import com.security.catalog.product.dto.ProductDTO;
 import com.security.catalog.product.dto.UserDTO;
 import com.security.catalog.product.dto.UserInsertDTO;
+import com.security.catalog.product.dto.UserUpdateDTO;
 import com.security.catalog.product.entities.User;
 import com.security.catalog.product.services.ProductService;
 import com.security.catalog.product.services.UserService;
@@ -55,9 +56,9 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> updateCategory(@PathVariable Long id , @Valid @RequestBody UserDTO dto){
-        dto = userService.updateUser(id , dto);
-        return ResponseEntity.ok().body(dto);
+    public ResponseEntity<UserDTO> updateCategory(@PathVariable Long id , @Valid @RequestBody UserUpdateDTO dto){
+       UserDTO newDto = userService.updateUser(id , dto);
+        return ResponseEntity.ok().body(newDto);
     }
 
     @DeleteMapping(value = "/{id}")
